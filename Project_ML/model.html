@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Churn Prediction</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    <style>
+        .col {
+            display: flex;
+            flex-direction: row;
+            margin: 30px;
+            flex-wrap: wrap;
+        }
+
+        .mb {
+            margin-bottom: 5px;
+        }
+
+        select {
+            width: 100px;
+            background: transparent;
+            border: 1px solid black;
+        }
+
+        option {
+            width: 100px;
+            background-color: white;
+        }
+
+        .custom-select {
+            display: flex;
+            color: black;
+            flex-direction: column;
+            align-items: center;
+            border-radius: 10px;
+            background-color: steelblue;
+            background: hsl(0,0%, 100%, 0.1);
+            backdrop-filter: blur(0.3rem);
+            box-shadow: 1px 1px 1px gray;
+            margin: 0px 8px 0px 8px;
+            padding: 5px;
+
+        }
+    </style>
+</head>
+
+<body>
+
+
+
+        <form action="/model" method="post" >
+
+            <div  class="container"
+                style=" background-color:rgb(246 233 233 / 64%); margin: 30px auto auto auto ; font-family: sans-serif; display: flex; flex-direction: column; align-items: center; justify-content: center; flex-wrap: wrap; box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);">
+
+                <div style="margin:10px; font-size: 20px;">
+                    <b>Churn Prediction</b>
+                </div>
+
+
+                <div id="first_raw" class="col">
+
+                    <div class="custom-select" style="width:200px">
+                        <div class="mb"><b> Gender </b> </div>
+                        <select name="gender" id="gender">
+                            <option value="1">Male</option>
+                            <option value="0">Female</option>
+                        </select>
+                    </div>
+
+
+                    <div class="custom-select" style="width:200px;">
+                        <div class="mb"><b> tenure_group </b> </div>
+                        <select name="tenure_group" id="tenure_group">
+                            <option value="0"> 0 - 1 year </option>
+                            <option value="1"> 1 - 2 year </option>
+                            <option value="2"> 2 - 3 year </option>
+                            <option value="3"> 3 - 4 year </option>
+                            <option value="4"> 4 - 5 year </option>
+                            <option value="5"> 5 - 6 year </option>
+                            <option value="5"> More Then 6 year </option>
+                        </select>
+                    </div>
+
+                    <div class="custom-select" style="width:200px;">
+                        <div class="mb"> <b> Contract</b> </div>
+                        <select name="Contract" id="Contract">
+                            <option value="0"> Month-To-month </option>
+                            <option value="1"> One Year </option>
+                            <option value="2"> Two Year </option>
+                        </select>
+                    </div>
+
+                    <div class="custom-select" style="width:200px;">
+                        <div class="mb"><b> PaymentMethod </b></div>
+                        <select name="PaymentMethod" id="PaymentMethod">
+                            <option value="0"> Bank Transfer </option>
+                            <option value="1"> Credit Card </option>
+                            <option value="2"> Electronic Check </option>
+                            <option value="3"> Mailed Check </option>
+                        </select>
+                    </div>
+
+
+                    <div class="custom-select" style="width:200px;">
+                        <div class="mb"> <b> InternetService </b></div>
+                        <select name="InternetService" id="InternetService">
+                            <option value="0"> DSL </option>
+                            <option value="1"> FIBER OPTIC </option>
+                            <option value="2"> NO </option>
+                        </select>
+                    </div>
+
+                </div>
+
+                <div id="fourth_row" class="col">
+                    <div class="custom-select" style="width:200px;">
+                        <div class="mb"><b> SeniorCitizen</b> </div>
+                        <select name="SeniorCitizen" id="SeniorCitizen">
+                            <option value="1">Yes</option>
+                            <option value="0"> No </option>
+                        </select>
+                    </div>
+
+                    <div class="custom-select" style="width:200px;">
+                        <div class="mb"> <b> Partner </b></div>
+                        <select name="Partner" id="Partner">
+                            <option value="1">Yes</option>
+                            <option value="0"> No </option>
+                        </select>
+                    </div>
+
+                    <div class="custom-select" style="width:200px;">
+                        <div class="mb"> <b> Dependents </b> </div>
+                        <select name="Dependents" id="Dependents">
+                            <option value="1">Yes</option>
+                            <option value="0"> No </option>
+                        </select>
+                    </div>
+
+                    <div class="custom-select" style="width:200px;">
+                        <div class="mb"> <b>PhoneService</b> </div>
+                        <select name="PhoneService" id="PhoneService">
+                            <option value="1">Yes</option>
+                            <option value="0"> No </option>
+                        </select>
+                    </div>
+
+                    <div class="custom-select" style="width:200px;">
+                        <div class="mb"><b> PaperlessBilling </b></div>
+                        <select name="PaperlessBilling" id="PaperlessBilling">
+                            <option value="0"> No </option>
+                            <option value="1"> Yes </option>
+                        </select>
+                    </div>
+
+                </div>
+
+                <div id="second_raw" class="col">
+
+                    <div class="custom-select" style="width:200px;">
+                        <div class="mb"> <b>OnlineSecurity </b></div>
+                        <select name="OnlineSecurity" id="OnlineSecurity">
+                            <option value="0"> No </option>
+                            <option value="1"> No Intel Services </option>
+                            <option value="2"> Yes </option>
+                        </select>
+                    </div>
+
+                    <div class="custom-select" style="width:200px;">
+                        <div class="mb"><b> OnlineBackup </b></div>
+                        <select name="OnlineBackup" id="OnlineBackup">
+                            <option value="0"> No </option>
+                            <option value="1"> No Intel Services </option>
+                            <option value="2"> Yes </option>
+                        </select>
+                    </div>
+
+                    <div class="custom-select" style="width:200px;">
+                        <div class="mb"><b> DeviceProtection</b> </div>
+                        <select name="DeviceProtection" id="DeviceProtection">
+                            <option value="0"> No </option>
+                            <option value="1"> No Intel Services </option>
+                            <option value="2"> Yes </option>
+                        </select>
+                    </div>
+
+                    <div class="custom-select" style="width:200px;">
+                        <div class="mb"> <b>TechSupport</b> </div>
+                        <select name="TechSupport" id="TechSupport">
+                            <option value="0"> No </option>
+                            <option value="1"> No Intel Services </option>
+                            <option value="2"> Yes </option>
+                        </select>
+                    </div>
+
+
+                    <div class="custom-select" style="width:200px;">
+                        <div class="mb"> <b>StreamingTV</b> </div>
+                        <select name="StreamingTV" id="StreamingTV">
+                            <option value="0"> No </option>
+                            <option value="1"> No Intel Services </option>
+                            <option value="2"> Yes </option>
+                        </select>
+                    </div>
+
+                </div>
+
+                <div id="third_raw" class="col">
+
+                    <div class="custom-select" style="width:200px;">
+                        <div class="mb"> <b>StreamingMovies</b> </div>
+                        <select name="StreamingMovies" id="StreamingMovies">
+                            <option value="0"> No </option>
+                            <option value="1"> No Intel Services </option>
+                            <option value="2"> Yes </option>
+                        </select>
+                    </div>
+
+                    <div class="custom-select" style="width:200px;">
+                        <div class="mb"> <b>MultipleLines</b> </div>
+                        <select name="MultipleLines" id="MultipleLines">
+                            <option value="0"> No </option>
+                            <option value="1"> No Phone Service </option>
+                            <option value="2"> Yes </option>
+                        </select>
+                    </div>
+
+                    <div class="custom-select" style="width:300px;">
+                        <div class="mb"> <b>MonthlyCharges</b> </div>
+                        <input style=" background: transparent; font-size: 11px; width: 200px;" name="MonthlyCharges" id="MonthlyCharges"
+                            placeholder="Enter MonthlyCharges">
+                    </div>
+
+                    <div class="custom-select" style="width:300px;">
+                        <div class="mb"><b> TotalCharges</b> </div>
+                        <input style=" background: transparent; font-size: 11px; width: 220px;" name="TotalCharges" id="TotalCharges"
+                            placeholder="Enter TotalCharges">
+                    </div>
+
+                </div>
+
+                <button style="margin: 10px 0px 10px 0px;" class="btn btn-primary" type="submit"> Submit </button>
+            </div>
+
+
+        </form>
+
+
+</body>
+
+</html>
